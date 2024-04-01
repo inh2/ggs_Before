@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">        
+<div layout:fragment="content">
+<div class="left_menu" th:replace="~{fragments/left :: adminLeft}"></div>	
+<!--joincss-->
+<link rel="stylesheet" type="text/css" href="/admin/css/admin.css">
+<!--joincss-->
+    <div id="myContent">
+	        <div th:replace="~{/admin/__${title}__ :: __${title}__}"></div>
+	</div>
+</div>
+</html>

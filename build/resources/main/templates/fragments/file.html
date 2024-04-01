@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="file">
+
+    <ul class="input_btn_ul">
+        <button type="button" onclick="addFileInput()">파일 추가</button>
+    </ul>
+
+    <ul class="files_input_ul" id="files_input_ul">
+        <div th:each="fileDto, stat :  *{fileDtos}">
+            <li th:id="'fileLi_'+${stat.index}">
+                <input type="hidden" th:field="*{fileDtos[__${stat.index}__].idx}" />
+                <input type="hidden" th:field="*{fileDtos[__${stat.index}__].status}" />
+                <input type="hidden" th:field="*{fileDtos[__${stat.index}__].ofile}" />
+                <input type="hidden" th:field="*{fileDtos[__${stat.index}__].sfile}" />
+                <input type="hidden" th:field="*{fileDtos[__${stat.index}__].path}" />
+                <img th:src="@{|*{fileDtos[__${stat.index}__].path}|}" alt="Goods Image" width="50px">
+                <span th:text="*{fileDtos[__${stat.index}__].ofile}"></span>
+                <button type="button" th:onclick="'removeFile(' + ${stat.index} + ')'" >X</button>
+
+            </li>
+        </div>
+    </ul>
+
+    <script th:inline="javascript">
+
+        var fileIdx = document.getElementById('files_input_ul').getElementsByTagName('li').length;
+
+        function addFileInput() {
+
+            var idx = fileIdx++;
+
+            var files_input_ul = document.getElementById("files_input_ul");
+
+            var newFileLi = document.createElement("li");
+            newFileLi.id = "fileLi_"+idx;
+
+            var hiddenInput = document.createElement("input");
+            hiddenInput.type = "hidden";
+            hiddenInput.name = "fileDtos[" + idx + "].status";
+            hiddenInput.id = "fileDtos"+idx+".status"
+            hiddenInput.value = "N";
+
+
+
+            var newFileBtn = document.createElement("input");
+            newFileBtn.type = "file";
+            newFileBtn.name = "fileDtos[" + idx + "].file";
+            newFileBtn.id = "fileDtos"+idx+".file"
+
+            var removeFileBtn = document.createElement("button")
+            removeFileBtn.type = "button"
+            removeFileBtn.innerText = "X"
+            removeFileBtn.onclick = function() {
+                removeFile(idx);
+            };
+
+            newFileLi.appendChild(hiddenInput);
+            newFileLi.appendChild(newFileBtn);
+            newFileLi.appendChild(removeFileBtn);
+            files_input_ul.appendChild(newFileLi);
+
+        }
+
+        function removeFile(fileId) {
+
+            var status = document.getElementById("fileDtos"+fileId+".status").value;
+
+            if(status == "") {
+
+                document.getElementById("fileDtos"+fileId+".status").value = "D"
+            }
+            var fileLi = document.getElementById("fileLi_"+fileId)
+            fileLi.style.display = "none";
+
+        }
+
+    </script>
+</div>
+</html>
+

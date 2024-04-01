@@ -1,0 +1,30 @@
+.selected {
+    background-color: lightblue;
+    color: white;
+}
+.goodsTop{display: flex; width: 100%; height: 91.5vh; overflow: hidden; margin:0 auto;}
+.goodsImg{width: 40%; position: relative; text-align: center;}
+.goodsImg img {width:100%; height: 100%;}
+#goodsName{font-size: 20px; padding:10px 20px; display: inline-block;}
+#selectOption input{border: none; background:none;}
+.goodsInfoWrap{flex:1; text-align: left; position: relative;}
+.fixedInfo{position: absolute; bottom: 0; left:20px; width: 97%; list-style: none;}
+.fixedOption{position: absolute; top:0; right: 0;}
+.stocks{width: 30px;}
+.goodsInfoArea{}
+.goodsInfoWrap .goodsInfo{}
+.goodsInfoWrap .goodsInfo table{display: inline-block;padding:10px 20px;}
+.goodsInfoWrap .goodsInfo tr{}
+.goodsInfoWrap .goodsInfo td{padding:5px 0 ;}
+.goodsInfoWrap .goodsInfo td:nth-child(2){padding:5px 20px ;}
+.goodsInfoWrap .goodsOptionBox{display: inline-block;  margin-left: 10%; vertical-align: top;}
+.goodsInfoWrap .goodsOptionBox table{}
+.goodsInfoWrap .goodsOptionBox table tr{}
+.goodsInfoWrap .goodsOptionBox table td{padding:5px 0;}
+.goodsInfoWrap .goodsOptionBox table td:nth-child(2){padding:5px 20px;}
+.goodsInfoWrap .detailArea {position: relative; width: 97%; padding: 0 20px; margin-top:10px; height: 80%; overflow-y: auto;}
+.goodsInfoWrap .detailArea ul {width: 100%;}
+.goodsInfoWrap .detailArea ul img{max-width: 100%;}
+.buyButton{display: flex; width:100%; justify-content: space-evenly;}
+.buyButton button{width: 49%;}
+.sop p{display: inline-block; margin-right: 10px;}

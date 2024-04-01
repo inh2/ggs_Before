@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="myBoardLike">
+	<link rel="stylesheet" type="text/css" href="/layout/css/left.css">
+	<div class="myModify_wrap">
+		ㅎㅇ
+		<ul>
+			<li th:each="goodsLike:${likedBoards}">
+				<ul>
+					<li><a th:href="@{/board/board_detail/{idx}(idx=${goodsLike.board.idx})}" th:text="${goodsLike.board.idx}"></a></li>
+					<li><span th:text="${goodsLike.board.title}"></span></li>
+					<li><span th:text="${goodsLike.board.category}"></span></li>
+					<li><span th:text="${goodsLike.board.nickname}"></span></li>
+					<li><span th:text="${goodsLike.board.viewcount}"></span></li>
+					<li><span th:text="${#temporals.format(goodsLike.board.modifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></span></li>
+				</ul>
+			</li>
+		</ul>
+	</div>	
+</div>
+</html>

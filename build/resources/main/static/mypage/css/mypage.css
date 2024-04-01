@@ -1,0 +1,12 @@
+.content {
+    padding: 40px;
+    background-color: #FBF9F3;
+    flex: 1;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    vertical-align: top;
+    overflow-y: auto;
+}
+
+.contents{flex:1;}

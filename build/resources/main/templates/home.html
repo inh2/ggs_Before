@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<div layout:fragment="content">
+	<style>
+		.gswl li{padding:5px 0;}
+		.mySwiper99{height: 100%; margin-right: 0; margin-left:0;}
+	</style>
+	<link rel="stylesheet" type="text/css" href="/layout/css/main.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+	<div class="Hyeoks' OOTD">
+		<div class="f50">Best OOTD</div>
+		<div class="goods ct" style="position: relative; margin-bottom: 50px;">
+			<div class="mySwiper1 swiper" style="position: relative;">
+				<ul class="swiper-wrapper gsw">
+					<li class="swiper-slide gswl" th:each="goods:${goods}">
+						<ul>
+							<div style="position:relative; height: 0; padding-bottom:120%; overflow:hidden;" class="mySwiper1-2 swiper">
+								<div class="swiper-wrapper">
+									<li th:each="fileDto : ${goods.fileDtos}" th:name="${goods.idx}" class="button swiper-slide" style="padding-bottom:130%;">
+										<img th:src="@{|/img/goods/${fileDto.sfile}|}" alt="Goods Image" class="">
+									</li>
+								</div>
+								<div class="i-hover">
+									<div class="swiper-button-next"></div>
+									<div class="swiper-button-prev"></div>
+									<div class="swiper-pagination"></div>
+								</div>
+							</div>
+							<li><a th:href="@{|/goods/detail/${goods.idx}|}" th:text="${goods.name}"></a></li>
+							<li th:text="${goods.summary}"></li>
+							<li th:text="${goods.sellingPrice}"></li>
+							<li th:text="${goods.discountPrice}"></li>
+							<!--<div class="left_menu" th:replace="~{fragments/like :: goodsLike(likeTF=${goods.likeTF})}"></div>-->
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="swiper-button-next1-1"></div>
+			<div class="swiper-button-prev1-1"></div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+		<!-- Initialize Swiper -->
+		<script>
+			var swiper = new Swiper(".mySwiper1", {
+				slidesPerView: 4.3,
+				pagination: {
+					el: ".swiper-pagination1-1",
+					clickable: true,
+				},
+				navigation: {
+					nextEl: ".swiper-button-next1-1",
+					prevEl: ".swiper-button-prev1-1",
+				},
+			});
+		</script>
+
+		<script>
+			var swiper = new Swiper(".mySwiper1-2", {
+				pagination: {
+					el: ".swiper-pagination",
+					type: "progressbar",
+				},
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev",
+				},
+			});
+		</script>
+	</div>
+
+
+	<div class="Hyeoks'PickGoods">
+		<div class="f50">Hyeok's Pick</div>
+		<div class="goods ct" style="position: relative; margin-bottom: 50px;">
+			<div class="mySwiper swiper" style="position: relative;">
+				<ul class="swiper-wrapper gsw">
+					<li class="swiper-slide gswl" th:each="goods:${goods}">
+						<ul>
+							<div style="position:relative; height: 0; padding-bottom:120%; overflow:hidden;" class="mySwiper2 swiper">
+								<div class="swiper-wrapper">
+									<li th:each="fileDto : ${goods.fileDtos}" th:name="${goods.idx}" class="button swiper-slide" style="padding-bottom:130%;">
+										<img th:src="@{|/img/goods/${fileDto.sfile}|}" alt="Goods Image" class="">
+									</li>
+								</div>
+								<div class="i-hover">
+									<div class="swiper-button-next"></div>
+									<div class="swiper-button-prev"></div>
+									<div class="swiper-pagination"></div>
+								</div>
+							</div>
+							<li><a th:href="@{|/goods/detail/${goods.idx}|}" th:text="${goods.name}"></a></li>
+							<li th:text="${goods.summary}"></li>
+							<li th:text="${goods.sellingPrice}"></li>
+							<li th:text="${goods.discountPrice}"></li>
+							<div class="left_menu" th:replace="~{fragments/like :: goodsLike(likeTF=${goods.likeTF})}"></div>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="swiper-button-next2-1"></div>
+			<div class="swiper-button-prev2-1"></div>
+			<div class="swiper-pagination2-1"></div>
+		</div>
+
+		<!-- Initialize Swiper -->
+		<script>
+			var swiper = new Swiper(".mySwiper", {
+				slidesPerView: 4.3,
+				pagination: {
+					el: ".swiper-pagination2",
+					clickable: true,
+				},
+				navigation: {
+					nextEl: ".swiper-button-next2-1",
+					prevEl: ".swiper-button-prev2-1",
+				},
+			});
+		</script>
+
+		<script>
+			var swiper = new Swiper(".mySwiper2", {
+				pagination: {
+					el: ".swiper-pagination",
+					type: "progressbar",
+				},
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev",
+				},
+			});
+		</script>
+                <div th:each="goods:${goods}">
+                    <div th:class="'modal-container' + ${goods.idx} + ' modal-container'">
+                        <div class="modal-background">
+                            <div class="modal" >
+                                <div class="mScroll">
+                                    <div class="modalOut" th:name="${goods.idx}" onclick="modalOut()">엑스염</div>
+                                    <div th:replace="~{goods/detail :: goodsDetailFragment(goods = ${goods})}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+	</div>
+
+	<script>
+		var jsonData = null;
+		var $button         = $('.button'),
+				$modalContainer,
+				$body           = $('body'),
+				$ct        = $('.ct'),
+				$idx,
+				chkModal,
+				btnId;
+
+		$button.on('click', function () {
+			idx = $(this).attr('name');
+			chkModal ="modal-container"+idx;
+			modalContainer = $('.'+chkModal)
+			btnId = 'two';
+			modalContainer
+					.removeClass('out')
+					.addClass(btnId);
+			$ct
+					.removeAttr('class')
+					.addClass('ct');
+
+			$body.addClass('modal-active');
+			$ct.addClass(btnId);
+		});
+
+		function modalOut(){
+
+			idx = $(this).attr('name');
+			chkModal ="modal-container"+idx;
+			modalContainer = $('.'+chkModal)
+			modalContainer.addClass('out');
+			$body.removeClass('modal-active');
+			$('.sop').empty();
+			$(':button').removeClass('selected');
+			if (modalContainer.hasClass(btnId)) {
+				$ct.addClass('out');
+			}
+		}
+
+		$(document).keyup(function (e) {
+			if (e.key === "Escape") {
+				modalOut();
+			}
+		});
+
+	</script>
+
+</div>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:fragment="header">
+	<link rel="stylesheet" type="text/css" href="/layout/css/layout.css">
+	<link rel="stylesheet" type="text/css" href="/layout/css/header.css">
+	<link rel="stylesheet" type="text/css" href="/layout/css/left.css">
+	<div class="headerStatic">
+		<div class="menuBtn">
+			<img src="" alt="menu" onclick="extendMenu()">
+		</div>
+		<div class="logo">
+			<a href="/"><img src="/img/logo.png" alt="logo"></a>
+		</div>
+		<div class="logo">
+			<a href="/mypage/myList" sec:authorize="isAuthenticated()">마이페이지</a>
+		</div>
+	</div><div class="headerExtend">
+	<div th:insert="~{fragments/left :: mainLeft}"></div>
+</div>
+
+	<script>
+		function extendMenu(){
+			var extend = $('.headerExtend');
+			var filter = $('#contentFilter');
+			var currentWidth = extend.width();
+
+			// 만약 현재 너비가 0이면 300px로, 그렇지 않으면 0으로 설정
+			extend.css("width", currentWidth === 0 ? '300px' : '0');
+			filter.css("width", currentWidth === 0 ? '100%' : '0');
+			// 너비가 0이면 overlay를 숨기고, 그렇지 않으면 표시
+			extend.css("overflow", currentWidth === 0 ? 'visible' : 'hidden');
+
+		}
+
+		function loginPage(){
+			alert("로그인해야되지롱")
+		}
+	</script>
+</header>
+</html>
